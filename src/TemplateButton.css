@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Permanent+Marker&display=swap");
+.templatebutton {
+  box-sizing: border-box;
+  width: 15em;
+  height: 3em;
+  font-size: 1em;
+  font-weight: bolder;
+  border-radius: 0.5em;
+  margin: 0.5em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: "Nanum Brush Script", sans-serif, cursive;
+  text-transform: capitalize;
+  line-height: 3em;
+  transition: 0.3s;
+  cursor: pointer;
+  background: linear-gradient(to right, orange, tomato);
+  text-align: left;
+  padding-left: 10%;
+  transform: perspective(500px) rotateY(45deg);
+}
+.templatebutton:hover {
+  transform: perspective(250px) rotateY(45deg);
+  padding-left: 5%;
+}
