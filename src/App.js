@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
-import "/media/shrey/Shrey/MemeIt/memeit/src/ImageGrid.css";
-import CollectionEvent from "./Events/CollectionEvent";
-import TemplateEvent from "./Events/TemplateEvent";
-import Template from "./Events/Template";
-import { CanvasDraw } from "./Events/CanvasDraw";
+import "./ImageGrid.css";
+import CollectionEvent from "./CollectionEvent";
+import TemplateEvent from "./TemplateEvent";
+import EditTemplate from "./EditTemplate";
+import Template from "./Template";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Home page
@@ -26,10 +26,17 @@ const TemplateRoute = () => {
   );
 };
 
-const CanvasRoute = () => {
+const CollectionRoute = () => {
+  return (
+    <div className="ImageGrid">
+      <Template />
+    </div>
+  );
+};
+const EditTemplateRoute = () => {
   return (
     <div>
-      <CanvasDraw />
+      <EditTemplate />
     </div>
   );
 };
@@ -40,6 +47,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomeRoute} />
           <Route exact path="/template" component={TemplateRoute} />
+          <Route exact path="/collection" component={CollectionRoute} />
+          <Route exact path="/edittemplate" component={EditTemplateRoute} />
         </Switch>
       </Router>
     );

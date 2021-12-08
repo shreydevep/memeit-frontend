@@ -1,0 +1,59 @@
+.buttons {
+  text-decoration: none;
+  border: 3px solid yellow;
+  color: transparent;
+  padding:2rem 2.5rem;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  letter-spacing: 5px;
+  transition: all 0.5s;
+  position: relative;
+}
+.buttons:before {
+  content: "Edit";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: yellow;
+  background: #282c34;
+  font-size: 1.2rem;
+  top: 0;
+  left: 100%;
+  font-family: sans-serif;
+  letter-spacing: 5px;
+  transition: all 1s;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: scale(0) rotatey(0);
+  opacity: 0;
+}
+.buttons:hover:before {
+  transform: scale(1) rotatey(360deg);
+  left: 0;
+  opacity: 1;
+}
+.buttons:after {
+  content: "Edit";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: yellow;
+  background: #282c34;
+  font-size: 1.2rem;
+  top: 0;
+  left: 0;
+  font-family: sans-serif;
+  letter-spacing: 5px;
+  transition: all 1s;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: scale(1) rotatey(0);
+  opacity: 1;
+}
+.buttons:hover:after {
+  transform: scale(0) rotatey(360deg);
+  left: -100%;
+  opacity: 0;
+}

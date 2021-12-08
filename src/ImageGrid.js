@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import "/media/shrey/Shrey/MemeIt/memeit/src/ImageGrid.css";
+import "./ImageGrid.css";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
 const ImageGrid = ({ docs }) => {
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImg, setSelectedImg] = useState({
+    selectedImg: "",
+    template_id: "",
+  });
   return (
     <div>
       <div className="img-grid">
@@ -15,7 +18,9 @@ const ImageGrid = ({ docs }) => {
               layout
               whileHover={{ opacity: 1 }}
               s
-              onClick={() => setSelectedImg(doc.url)}
+              onClick={() =>
+                setSelectedImg({ selectedImg: doc.url, template_id: doc.id })
+              }
             >
               <motion.img
                 src={doc.url}
@@ -27,7 +32,7 @@ const ImageGrid = ({ docs }) => {
             </motion.div>
           ))}
       </div>
-      {selectedImg && (
+      {selectedImg.selectedImg && (
         <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
       )}
     </div>

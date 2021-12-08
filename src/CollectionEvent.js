@@ -1,5 +1,5 @@
 import React from "react";
-import "/media/shrey/Shrey/MemeIt/memeit/src/CollectionButton.css";
+import "./CollectionButton.css";
 const collectionEvent = (props) => {
   console.log("./api/v1/collection");
 };

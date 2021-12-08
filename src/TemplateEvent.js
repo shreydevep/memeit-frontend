@@ -1,5 +1,5 @@
 import React from "react";
-import "/media/shrey/Shrey/MemeIt/memeit/src/TemplateButton.css";
+import "./TemplateButton.css";
 const templateEvent = (props) => {
   console.log("./api/v1/template");
 };

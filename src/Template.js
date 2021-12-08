@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "/media/shrey/Shrey/MemeIt/memeit/src/ImageGrid.css";
+import "./ImageGrid.css";
 import ImageGrid from "./ImageGrid";
 //Fetch API
 const loadedFun = (tmp) => {
