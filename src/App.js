@@ -30,6 +30,7 @@ const CollectionRoute = () => {
   return (
     <div className="ImageGrid">
       <Template />
+      {/*<Collection/>*/}
     </div>
   );
 };

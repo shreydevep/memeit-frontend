@@ -42,6 +42,8 @@ const EditTemplate = () => {
             ...inputState,
             url: data.data.url,
           });
+          /** DB Store Edited Image */
+          /** Collection End Point render */
         })
         .catch((error) => {
           console.error("Error:", error);
