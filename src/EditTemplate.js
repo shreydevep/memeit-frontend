@@ -43,6 +43,23 @@ const EditTemplate = () => {
             url: data.data.url,
           });
           /** DB Store Edited Image */
+          let userObj = {
+            name: "Sgdsgdsmy",
+            tags: ["sfsdgdle.com", "asgrsd"],
+            path: "Pro",
+          };
+
+          let userStr = JSON.stringify(userObj);
+          console.log("pata karna hai");
+          fetch("http://localhost:3001/api/v1/collections", {
+            method: "POST",
+            mode:"cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: userStr,
+          });
           /** Collection End Point render */
         })
         .catch((error) => {
