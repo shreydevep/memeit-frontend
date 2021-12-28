@@ -28,7 +28,8 @@ const EditTemplate = () => {
     border: "3px solid white",
   };
   const handlerCreateMeme = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    let secureURL;
     if (inputState.url && (inputState.text0 || inputState.text1)) {
       console.log(inputState);
       let url = `https://api.imgflip.com/caption_image?template_id=${inputState.template_id}&username=niwib&password=niwib@1234&text0=${inputState.text0}&text1=${inputState.text0}`;
@@ -43,6 +44,22 @@ const EditTemplate = () => {
             url: data.data.url,
           });
           /** DB Store Edited Image */
+          // get secure url from our server
+        })
+        .then(() => {
+          fetch("http://localhost:3001/api/v1/s3Url", {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              secureURL=res.secureURL
+            });
+          // console.log(secureURL);
+
           let userObj = {
             name: "Sgdsgdsmy",
             tags: ["sfsdgdle.com", "asgrsd"],
@@ -53,7 +70,7 @@ const EditTemplate = () => {
           console.log("pata karna hai");
           fetch("http://localhost:3001/api/v1/collections", {
             method: "POST",
-            mode:"cors",
+            mode: "cors",
             headers: {
               "Content-Type": "application/json",
             },
@@ -61,6 +78,14 @@ const EditTemplate = () => {
             body: userStr,
           });
           /** Collection End Point render */
+        }).then(()=>{
+           fetch(secureURL, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "multipart/form-data"
+            },
+            body: file
+          })
         })
         .catch((error) => {
           console.error("Error:", error);
