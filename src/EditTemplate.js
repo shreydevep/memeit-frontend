@@ -35,7 +35,7 @@ const EditTemplate = () => {
     let finalImgURL = "";
     if (inputState.url && (inputState.text0 || inputState.text1)) {
       console.log(inputState);
-      let url = `https://api.imgflip.com/caption_image?template_id=${inputState.template_id}&username=niwib&password=niwib@1234&text0=${inputState.text0}&text1=${inputState.text0}`;
+      let url = `https://api.imgflip.com/caption_image?template_id=${inputState.template_id}&username=niwib&password=niwib@1234&text0=${inputState.text0}&text1=${inputState.text1}`;
       fetch(url, {
         method: "POST",
       })

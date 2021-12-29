@@ -5,6 +5,7 @@ import CollectionEvent from "./CollectionEvent";
 import TemplateEvent from "./TemplateEvent";
 import EditTemplate from "./EditTemplate";
 import Template from "./Template";
+import Collection from "./Collection";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Home page
@@ -27,12 +28,7 @@ const TemplateRoute = () => {
 };
 
 const CollectionRoute = () => {
-  return (
-    <div className="ImageGrid">
-      <Template />
-      {/*<Collection/>*/}
-    </div>
-  );
+  return <div className="ImageGrid">{<Collection />}</div>;
 };
 const EditTemplateRoute = () => {
   return (
