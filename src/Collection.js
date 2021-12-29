@@ -14,11 +14,17 @@ const Template = () => {
 
   const fetchData = () => {
     setLoading(true);
-    fetch("https://api.imgflip.com/get_memes")
+    fetch("http://localhost:3001/api/v1/collections", {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setTodo(data);
+        let dataObj = { data: data.items };
+        setTodo(dataObj);
         setLoading(false);
       })
       .catch((error) => {
@@ -26,7 +32,7 @@ const Template = () => {
         setLoading(true);
       });
   };
-  return <div>{!loading && loadedFun(todo.data.memes)}</div>;
+  return <div>{!loading && loadedFun(todo.data)}</div>;
 };
 
 export default Template;

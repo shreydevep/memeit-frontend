@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ImageGrid.css";
 import Modal from "./Modal";
 import { motion } from "framer-motion";
+
 const ImageGrid = ({ docs }) => {
   const [selectedImg, setSelectedImg] = useState({
     selectedImg: "",
@@ -14,12 +15,15 @@ const ImageGrid = ({ docs }) => {
           docs.map((doc) => (
             <motion.div
               className="img-wrap"
-              key={doc.id}
+              key={doc.id || doc._id}
               layout
               whileHover={{ opacity: 1 }}
               s
               onClick={() =>
-                setSelectedImg({ selectedImg: doc.url, template_id: doc.id })
+                setSelectedImg({
+                  selectedImg: doc.url,
+                  template_id: doc.id || doc._id,
+                })
               }
             >
               <motion.img
