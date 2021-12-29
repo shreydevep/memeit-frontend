@@ -30,6 +30,9 @@ const EditTemplate = () => {
   const handlerCreateMeme = (e) => {
     e.preventDefault();
     let secureURL;
+    let imgURL;
+    let file;
+    let finalImgURL = "";
     if (inputState.url && (inputState.text0 || inputState.text1)) {
       console.log(inputState);
       let url = `https://api.imgflip.com/caption_image?template_id=${inputState.template_id}&username=niwib&password=niwib@1234&text0=${inputState.text0}&text1=${inputState.text0}`;
@@ -43,10 +46,14 @@ const EditTemplate = () => {
             ...inputState,
             url: data.data.url,
           });
+          return data;
           /** DB Store Edited Image */
           // get secure url from our server
         })
-        .then(() => {
+        .then((data) => {
+          imgURL = data.data.url;
+        })
+        .then((res) => {
           fetch("http://localhost:3001/api/v1/s3Url", {
             method: "GET",
             mode: "cors",
@@ -56,36 +63,53 @@ const EditTemplate = () => {
           })
             .then((res) => res.json())
             .then((res) => {
-              secureURL=res.secureURL
+              secureURL = res.secureURL;
+              finalImgURL = secureURL.split("?")[0];
             });
           // console.log(secureURL);
-
-          let userObj = {
-            name: "Sgdsgdsmy",
-            tags: ["sfsdgdle.com", "asgrsd"],
-            path: "Pro",
-          };
-
-          let userStr = JSON.stringify(userObj);
-          console.log("pata karna hai");
-          fetch("http://localhost:3001/api/v1/collections", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-
-            body: userStr,
-          });
           /** Collection End Point render */
-        }).then(()=>{
-           fetch(secureURL, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "multipart/form-data"
-            },
-            body: file
-          })
+        })
+        .then(() => {
+          fetch(imgURL)
+            .then((res) => {
+              return res.blob();
+            })
+            .then((blob) => {
+              console.log(blob);
+              file = new File([blob], "test.jpg", { type: "image/jpeg" });
+            })
+            .then(() => {
+              console.log(file);
+            })
+            .then(() => {
+              fetch(secureURL, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+                body: file,
+              }).then(() => {
+                let userObj = {
+                  name: "test",
+                  tags: ["sfsdgdle.com", "asgrsd"],
+                  path: finalImgURL,
+                };
+                let userStr = JSON.stringify(userObj);
+                console.log("pata karna hai");
+                fetch("http://localhost:3001/api/v1/collections", {
+                  method: "POST",
+                  mode: "cors",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+
+                  body: userStr,
+                });
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((error) => {
           console.error("Error:", error);
