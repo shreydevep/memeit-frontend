@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
+import { saveAs } from "file-saver";
 const Modal = ({ setSelectedImg, selectedImg }) => {
   const history = useHistory();
   const handleClick = (e) => {
@@ -13,6 +14,10 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
   };
   const editClickHandler = () => {
     history.push("/edittemplate", { selectedImg: selectedImg });
+  };
+  const downloadClickHandler = () => {
+    const selectedURL = selectedImg.selectedImg;
+    saveAs(selectedURL,`${selectedImg.template_id}.jpg`)
   };
   const editStyle = {
     marginLeft: "25%",
@@ -32,7 +37,9 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
         <button className="templatebutton" onClick={editClickHandler}>
           edit
         </button>
-        <button className="collectionbutton">Download</button>
+        <button className="collectionbutton" onClick={downloadClickHandler}>
+          Download
+        </button>
       </motion.div>
       <motion.img
         src={selectedImg.selectedImg}

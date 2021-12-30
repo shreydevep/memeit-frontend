@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Form, FormGroup, Input, Button } from "reactstrap";
-
+import { saveAs } from "file-saver";
 const EditTemplate = () => {
   const location = useLocation();
   const selectedImg = location.state.selectedImg;
@@ -26,6 +26,9 @@ const EditTemplate = () => {
     margin: "60px auto",
     boxShadow: "3px 5px 7px rgba(0, 0, 0, 0.5)",
     border: "3px solid white",
+  };
+  const downloadClickHandler = () => {
+    saveAs(inputState.url,`${inputState.template_id}.jpg`)
   };
   const handlerCreateMeme = (e) => {
     e.preventDefault();
@@ -75,11 +78,11 @@ const EditTemplate = () => {
               return res.blob();
             })
             .then((blob) => {
-              console.log(blob);
+              // console.log(blob);
               file = new File([blob], "test.jpg", { type: "image/jpeg" });
             })
             .then(() => {
-              console.log(file);
+              // console.log(file);
             })
             .then(() => {
               fetch(secureURL, {
@@ -95,7 +98,7 @@ const EditTemplate = () => {
                   path: finalImgURL,
                 };
                 let userStr = JSON.stringify(userObj);
-                console.log("pata karna hai");
+                // console.log("pata karna hai");
                 fetch("http://localhost:3001/api/v1/collections", {
                   method: "POST",
                   mode: "cors",
@@ -172,6 +175,15 @@ const EditTemplate = () => {
             onClick={handlerCreateMeme}
           >
             Submit
+          </Button>
+          <Button
+            style={{
+              margin: "20px",
+              background: "linear-gradient(to right, orange, tomato)",
+            }}
+            onClick={downloadClickHandler}
+          >
+            Download
           </Button>
         </Form>
       </Container>
